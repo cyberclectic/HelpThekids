@@ -19,7 +19,7 @@ class ViewController: UIViewController,DrawingProtocol {
         drawingView.delegate = self
     }
     
-    func fingerDidMoveToOutSideThePath(str: String) {
+    func touchDidMoveToOutSideThePath(str: String) {
         myLabel.text = str;
     }
 

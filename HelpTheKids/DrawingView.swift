@@ -10,7 +10,7 @@ import UIKit
 
 protocol DrawingProtocol
 {
-    func fingerDidMoveToOutSideThePath(str:String)
+    func touchDidMoveToOutSideThePath(str:String)
 }
 
 class DrawingView: UIView {
@@ -24,17 +24,20 @@ class DrawingView: UIView {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         path = UIBezierPath()
-        UIColor.red.setStroke()
+        UIColor.blue.setStroke()
         UIGraphicsBeginImageContext(self.frame.size)
     }
     
     func createShape()
     {
+        let center: CGPoint = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
+        
+        
         bezierPath = UIBezierPath()
-        bezierPath?.move(to: CGPoint(x: 50, y: 100))
-        bezierPath?.addLine(to: CGPoint(x: 270, y: 100))
-        bezierPath?.addLine(to: CGPoint(x: 270, y: 300))
-        bezierPath?.addLine(to: CGPoint(x: 50, y: 300))
+        bezierPath?.move(to: CGPoint(x: center.x-100, y: center.y-100))
+        bezierPath?.addLine(to: CGPoint(x: center.x+100, y: center.y-100))
+        bezierPath?.addLine(to: CGPoint(x: center.x+100, y: center.y+100))
+        bezierPath?.addLine(to: CGPoint(x: center.x-100, y: center.y+100))
         bezierPath?.close()
         UIColor.black.setStroke()
         bezierPath?.stroke()
@@ -72,11 +75,11 @@ class DrawingView: UIView {
             
             if(!bezierPath!.contains(endPoint))
             {
-                delegate.fingerDidMoveToOutSideThePath(str: "outside")
+                delegate.touchDidMoveToOutSideThePath(str: "outside")
             }
             else
             {
-                delegate.fingerDidMoveToOutSideThePath(str: "inside")
+                delegate.touchDidMoveToOutSideThePath(str: "inside")
             }
             
             ctr += 1;
