@@ -24,8 +24,6 @@ class DrawingView: UIView {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         path = UIBezierPath()
-        UIColor.blue.setStroke()
-        UIGraphicsBeginImageContext(self.frame.size)
     }
     
     func createShape()
@@ -49,7 +47,7 @@ class DrawingView: UIView {
         
         /// pen
         path?.lineWidth = 8
-        UIColor.red.setStroke()
+        UIColor.blue.setStroke()
         path?.stroke()
         
     }
@@ -75,11 +73,11 @@ class DrawingView: UIView {
             
             if(!bezierPath!.contains(endPoint))
             {
-                delegate.touchDidMoveToOutSideThePath(str: "outside")
+                delegate.touchDidMoveToOutSideThePath(str: "Outside")
             }
             else
             {
-                delegate.touchDidMoveToOutSideThePath(str: "inside")
+                delegate.touchDidMoveToOutSideThePath(str: "Inside")
             }
             
             ctr += 1;
@@ -100,7 +98,7 @@ class DrawingView: UIView {
             }
         super.touchesBegan(touches , with:event)
         }
-  }
+    }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
